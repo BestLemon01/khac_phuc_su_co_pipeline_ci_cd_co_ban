@@ -1,0 +1,16 @@
+image: gradle:8.5-jdk17-alpine
+
+stages:
+  - build_app
+
+before_script:
+  - chmod +x gradlew
+
+build_job:
+  stage: build_app
+  script:
+    - ./gradlew clean build -x test
+  artifacts:
+    paths:
+      - build/libs/*.jar
+    expire_in: 1 week
